@@ -23,6 +23,9 @@ class Vector:
     def set(self, index, value):
         self.vector[index] = value
 
+    def sublist(self, start, length):
+        return self.vector[start:start + length]
+
     def size(self):
         return len(self.vector)
 

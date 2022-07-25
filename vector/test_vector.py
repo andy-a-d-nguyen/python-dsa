@@ -102,3 +102,12 @@ def test_remove_all():
     vector.add("b")
     remove_all(vector, "b")
     assert str(vector) == str(["a", "c", "a"])
+
+
+def test_sublist():
+    v = Vector()
+    v.add(1)
+    v.add(2)
+    v.add(3)
+    v.add(4)
+    assert v.sublist(1, 2) == [2, 3]

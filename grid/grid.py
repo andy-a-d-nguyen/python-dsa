@@ -33,8 +33,14 @@ class Grid:
     def num_cols(self):
         return len(self.grid[0])
 
+    def width(self):
+        return self.num_cols()
+
     def num_rows(self):
         return len(self.grid)
+
+    def height(self):
+        return self.num_rows()
 
     def resize(self, rows, columns):
         self.__init__(rows, columns)
