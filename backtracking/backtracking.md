@@ -12,9 +12,15 @@
 
 ## A general pseudocode algorithm for backtracking problems
 
-Explore(decisions):
-- If there are no more decisions to make: stop
-- Else, Let's handle one decision ourselves, and the rest by recursion. For each available choice C for this decision:
-  - Choose C
-  - Explore the remaining decisions that could follow C
-  - Un-choose C (backtrack)
+function Explore(decisions):
+- If there are decisions left to make:
+  - Let's handle one decision ourselves, and the rest by recursion
+  - For each available choice C in my decision:
+    - Choose C
+    - Explore the remaining decisions that could follow C
+    - Un-choose C (backtrack)
+- Otherwise, if there are no more decisions to make: Stop
+
+- Key tasks:
+  - Figure out appropriate smallest unit of work (decision)
+  - Figure out how to enumerate all possible choices/options for it
