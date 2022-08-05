@@ -1,4 +1,4 @@
-from backtracking.maze import Maze
+from backtracking.maze import Maze, escape_maze
 
 
 def test_maze():
@@ -44,7 +44,7 @@ def test_is_open():
 
 def test_is_tainted():
     m = Maze(3, 3)
-    m.maze[0][0] = '^'
+    m.maze[0][0] = 'x'
     assert m.is_tainted(0, 0) is True
     assert m.is_tainted(2, 2) is False
 
@@ -80,3 +80,15 @@ def test_un_taint():
     m.taint(0, 0)
     m.un_taint(0, 0)
     assert m.is_tainted(0, 0) is False
+
+
+def test_escape_maze():
+    m = Maze(5, 5)
+    m.maze = [
+        ['=', '=', '=', '=', ''],
+        ['=', '=', '=', '', ''],
+        ['=', '=', '=', '', '='],
+        ['=', '=', '=', '', '='],
+        ['=', '=', '=', '', '=']
+    ]
+    assert escape_maze(m, 0, 4) is True
