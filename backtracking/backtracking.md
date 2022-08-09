@@ -24,3 +24,29 @@ function Explore(decisions):
 - Key tasks:
   - Figure out appropriate smallest unit of work (decision)
   - Figure out how to enumerate all possible choices/options for it
+
+## "Arm's Length" Recursion
+
+- Arm's length recursion: A poor style where unnecessary tests are performed before performing recursive calls.
+  - Typically, the tests try to avoid making a call into what would otherwise be a base case
+- Example: escape_maze
+  - The code recursively tries to explore up, down, left, and right
+  - Some of those directions may lead to walls or off the board. Shouldn't we test before making calls in these 
+    directions?
+
+Essentially, arm's length recursion is excessively checking for bad paths before making recursive calls. This fills up 
+the code with unnecessary conditional checks as opposed to making recursive calls to check for bad paths.
+
+## 8 Queens
+
+### Naive algorithm
+
+For (each board square):
+- Place a queen there
+- Try to place the rest of the queens
+- Un-place the queen
+
+### Better algorithm idea
+
+- Observation: In a working solution, exactly 1 queen must appear in each row and in each column
+  - Redefine a "choice" to be valid placement of a queen in a particular column

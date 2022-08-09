@@ -69,10 +69,10 @@ def escape_maze(maze: Maze, row: int, col: int) -> bool:
         maze.mark(row, col)
 
         # explore
-        result = escape_maze(maze, row - 1, col) \
-            or escape_maze(maze, row + 1, col) \
-            or escape_maze(maze, row, col - 1) \
-            or escape_maze(maze, row, col + 1)
+        result = (escape_maze(maze, row - 1, col)
+                  or escape_maze(maze, row + 1, col)
+                  or escape_maze(maze, row, col - 1)
+                  or escape_maze(maze, row, col + 1))
 
         # un-choose
         if result is False:
@@ -81,3 +81,48 @@ def escape_maze(maze: Maze, row: int, col: int) -> bool:
         return result
     else:
         return False
+
+
+def escape_maze_alternative(maze: Maze, row: int, col: int) -> bool:
+    if maze.in_bounds(row, col) is False:
+        # base case 1: escaped
+        return True
+    elif maze.is_open(row, col) is False:
+        # base case 2: blocked
+        return False
+    else:
+        # recursive case: try to escape in 4 directions
+        maze.mark(row, col)
+        if (escape_maze_alternative(maze, row - 1, col)
+                or escape_maze_alternative(maze, row + 1, col)
+                or escape_maze_alternative(maze, row, col - 1)
+                or escape_maze_alternative(maze, row, col + 1)):
+            # one of the paths worked
+            return True
+        else:
+            maze.taint(row, col)
+            # all 4 paths failed; taint
+            return False
+
+
+def escape_maze_arms_length(maze: Maze, row: int, col: int) -> bool:
+    maze.mark(row, col)
+
+    # recursive case: try to escape in 4 directions
+    # check each one by arm's length
+    if maze.in_bounds(row - 1, col) and maze.is_open(row - 1, col):
+        if escape_maze_arms_length(maze, row - 1, col):
+            return True
+    if maze.in_bounds(row + 1, col) and maze.is_open(row + 1, col):
+        if escape_maze_arms_length(maze, row + 1, col):
+            return True
+    if maze.in_bounds(row, col - 1) and maze.is_open(row, col - 1):
+        if escape_maze_arms_length(maze, row, col - 1):
+            return True
+    if maze.in_bounds(row, col + 1) and maze.is_open(row, col + 1):
+        if escape_maze_alternative(maze, row, col + 1):
+            return True
+
+    maze.taint(row, col)
+    # all 4 paths failed; taint
+    return False
