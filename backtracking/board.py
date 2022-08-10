@@ -10,14 +10,6 @@ class Board:
     def in_bounds(self, row, col):
         return 0 <= row < self.size and 0 <= col < self.size
 
-    def is_safe(self, row, col):
-        # base case
-        # there's a queen where I'm placing
-        if self.board[row][col] == '*':
-            return False
-        # recursive case
-        # explore where I can go from where I am
-
     def is_safe_vertically(self, row, col):
         # Can't figure out why this causes stack overflow
         # if self.in_bounds(row, col) is False:
@@ -50,6 +42,45 @@ class Board:
                 return False
             right_limit += 1
         return True
+
+    def is_safe_diagonally_from_left(self, row, col):
+        left_upper_limit = [row, col]
+        right_lower_limit = [row, col]
+        while left_upper_limit[0] >= 0 and left_upper_limit[1] >= 0:
+            if self.board[left_upper_limit[0]][left_upper_limit[1]] == '*':
+                return False
+            left_upper_limit[0] -= 1
+            left_upper_limit[1] -= 1
+        while right_lower_limit[0] < self.size and right_lower_limit[1] < self.size:
+            if self.board[right_lower_limit[0]][right_lower_limit[1]] == '*':
+                return False
+            right_lower_limit[0] += 1
+            right_lower_limit[1] += 1
+        return True
+
+    def is_safe_diagonally_from_right(self, row, col):
+        left_lower_limit = [row, col]
+        right_upper_limit = [row, col]
+        while left_lower_limit[0] < self.size and left_lower_limit[1] >= 0:
+            if self.board[left_lower_limit[0]][left_lower_limit[1]] == '*':
+                return False
+            left_lower_limit[0] += 1
+            left_lower_limit[1] -= 1
+        while right_upper_limit[0] >= 0 and right_upper_limit[1] < self.size:
+            if self.board[right_upper_limit[0]][right_upper_limit[1]] == '*':
+                return False
+            right_upper_limit[0] -= 1
+            right_upper_limit[1] += 1
+        return True
+
+    def is_safe(self, row, col):
+        if (self.is_safe_horizontally(row, col)
+                and self.is_safe_vertically(row, col)
+                and self.is_safe_diagonally_from_left(row, col)
+                and self.is_safe_diagonally_from_right(row, col)):
+            return True
+        else:
+            return False
 
     def __str__(self):
         return str(self.board)

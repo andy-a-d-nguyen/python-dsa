@@ -1,10 +1,10 @@
 import pytest
 
-from queue.queue import Queue
-from queue.queue import LinkedList
-from queue.queue import Node
-from queue.queue import stutter
-from queue.queue import mirror
+from queue_implementation.queue import Queue
+from queue_implementation.queue import LinkedList
+from queue_implementation.queue import Node
+from queue_implementation.queue import stutter
+from queue_implementation.queue import mirror
 
 
 def test_add():
