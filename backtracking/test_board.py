@@ -45,3 +45,18 @@ def test_is_safe():
     assert b.is_safe(1, 1) is True
     b.board[1][1] = '*'
     assert b.is_safe(3, 3) is False
+
+
+def test_place():
+    b = Board(5)
+    b.place(0, 0)
+    assert b.is_safe(3, 3) is False
+    assert b.is_safe(4, 1) is True
+
+
+def test_remove():
+    b = Board(5)
+    b.place(0, 0)
+    assert b.is_safe(3, 3) is False
+    b.remove(0, 0)
+    assert b.is_safe(3, 3) is True

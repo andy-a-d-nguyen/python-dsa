@@ -82,5 +82,39 @@ class Board:
         else:
             return False
 
+    def place(self, row, col):
+        if self.is_safe(row, col):
+            self.board[row][col] = '*'
+
+    def remove(self, row, col):
+        if self.board[row][col] == '*':
+            self.board[row][col] = ''
+
     def __str__(self):
         return str(self.board)
+
+
+def solve_queens(board: Board):
+    solve_queens_helper(board, 0)
+
+
+def solve_queens_helper(board: Board, col: int):
+    # base case: I've reached the end of the board
+    if col >= board.size:
+        print(board)
+    else:
+        # for each choice: choose, explore, unchoose
+        for row in range(board.size):
+            # choose
+            if board.is_safe(row, col):
+                board.place(row, col)
+
+            # explore
+            solve_queens_helper(board, col + 1)
+
+            # un-choose
+            board.remove(row, col)
+
+
+if __name__ == '__main__':
+    solve_queens(Board(8))
