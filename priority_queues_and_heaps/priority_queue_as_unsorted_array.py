@@ -1,4 +1,4 @@
-from typing import Any, TypedDict, Union, List
+from typing import TypedDict, Union, List
 
 
 class Item(TypedDict):
@@ -57,14 +57,11 @@ class UnsortedArrayPQ:
         return len(self.priority_queue)
 
     def change_priority(self, value, priority):
-        element_exists = False
         for element in self.priority_queue:
             if element["value"] == value:
                 element["priority"] = priority
-                element_exists = True
-        # Can't figure out why I can't just loop and then raise after loop is done
-        if element_exists is False:
-            raise ValueError("No such value in priority queue")
+                return  # If I don't return, function will continue and raise error
+        raise ValueError("No such value in priority queue")
 
     def clear(self):
         self.priority_queue = []
