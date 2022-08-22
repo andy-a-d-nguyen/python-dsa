@@ -56,3 +56,18 @@ def test_change_priority():
     assert pq.peek_priority() == 2
     pq.change_priority("b", 10)
     assert pq.peek_priority() == 5
+
+
+def test_clear():
+    pq = SortedArrayPQ()
+    pq.enqueue("a", 5)
+    pq.enqueue("b", 1)
+    pq.clear()
+    assert pq.is_empty() is True
+
+
+def test_size():
+    pq = SortedArrayPQ()
+    pq.enqueue("a", 5)
+    pq.enqueue("b", 1)
+    assert pq.size() == 2

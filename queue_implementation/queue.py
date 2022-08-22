@@ -96,7 +96,7 @@ class Queue:
 def stutter(queue):
     result = Queue()
 
-    while queue.size() > 0:
+    while queue.count() > 0:
         current_value = queue.dequeue()
         result.enqueue(Node(current_value))
         result.enqueue(Node(current_value))
@@ -106,7 +106,7 @@ def stutter(queue):
 
 def mirror(queue):
     values = []
-    size = queue.size()
+    size = queue.count()
     for _ in range(size):
         current_value = queue.dequeue()
         queue.enqueue(Node(current_value))

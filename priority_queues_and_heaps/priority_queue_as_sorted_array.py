@@ -59,13 +59,13 @@ class SortedArrayPQ:
                 break
 
     def clear(self):
-        pass
+        self.priority_queue = []
 
     def is_empty(self):
         return len(self.priority_queue) == 0
 
     def size(self):
-        pass
+        return len(self.priority_queue)
 
     def to_string(self):
         return str(self.priority_queue)

@@ -84,7 +84,7 @@ def test_stutter():
     q.enqueue(Node(2))
     q.enqueue(Node(3))
     result = stutter(q)
-    assert result.size() == 6
+    assert result.count() == 6
     assert result.dequeue() == 1
     assert result.dequeue() == 1
 
@@ -95,7 +95,7 @@ def test_mirror():
     q.enqueue(Node(2))
     q.enqueue(Node(3))
     result = mirror(q)
-    assert result.size() == 6
+    assert result.count() == 6
     assert result.dequeue() == 1
     assert result.dequeue() == 2
     assert result.dequeue() == 3
