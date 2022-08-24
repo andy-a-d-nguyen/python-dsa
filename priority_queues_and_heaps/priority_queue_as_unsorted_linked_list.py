@@ -53,7 +53,7 @@ class UnsortedLinkedListPQ:
                     most_urgent = current
                 else:
                     current = current.next
-            return str(most_urgent)
+            return most_urgent
 
     def peek_priority(self):
         if self.head is None:

@@ -18,6 +18,9 @@ def test_enqueue():
     assert error.value.args[0] == "Value already exists in priority queue"
     assert pq.size() == 3
     assert pq.to_string() == "{value: a, priority: 10} -> {value: c, priority: 15} -> {value: b, priority: 20}"
+    pq.enqueue("d", 15)
+    assert pq.to_string() == "{value: a, priority: 10} -> {value: c, priority: 15} -> {value: d, priority: 15} -> {" \
+                             "value: b, priority: 20}"
 
 
 def test_dequeue():

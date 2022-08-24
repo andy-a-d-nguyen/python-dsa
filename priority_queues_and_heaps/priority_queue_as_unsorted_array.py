@@ -28,7 +28,7 @@ class UnsortedArrayPQ:
                 if self.priority_queue[i].get("priority") < most_urgent.get("priority"):
                     most_urgent = self.priority_queue[i]
                     self.priority_queue.pop(i)
-            return most_urgent
+            return most_urgent["value"]
 
     def peek(self):
         if self.is_empty():

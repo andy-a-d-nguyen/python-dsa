@@ -11,6 +11,8 @@ def test_enqueue():
     with pytest.raises(ValueError) as error:
         pq.enqueue("a", 20)
     assert error.value.args[0] == "Value already exists in priority queue"
+    pq.enqueue("c", 10)
+    assert pq.to_string() == "{value: a, priority: 20} -> {value: b, priority: 10} -> {value: c, priority: 10}"
 
 
 def test_dequeue():
@@ -30,7 +32,7 @@ def test_peek():
     assert error.value.args[0] == "Priority queue is empty"
     pq.enqueue("a", 20)
     pq.enqueue("b", 10)
-    assert pq.peek() == str(Node("b", 10))
+    assert str(pq.peek()) == str(Node("b", 10))
 
 
 def test_peek_priority():

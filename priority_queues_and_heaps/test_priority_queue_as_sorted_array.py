@@ -11,6 +11,9 @@ def test_enqueue():
     with pytest.raises(ValueError) as error:
         pq.enqueue("b", 1)
     assert error.value.args[0] == "Value already exists in priority queue"
+    pq.enqueue("c", 1)
+    assert pq.to_string() == str([{"value": "b", "priority": 1}, {"value": "c", "priority": 1}, {"value": "a",
+                                                                                                 "priority": 5}])
 
 
 def test_dequeue():
@@ -20,7 +23,7 @@ def test_dequeue():
     assert error.value.args[0] == "Priority queue is empty"
     pq.enqueue("a", 5)
     pq.enqueue("b", 1)
-    assert pq.dequeue() == {"value": "b", "priority": 1}
+    assert pq.dequeue() == "b"
 
 
 def test_is_empty():

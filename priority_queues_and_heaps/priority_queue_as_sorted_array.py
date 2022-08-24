@@ -26,7 +26,7 @@ class SortedArrayPQ:
         if self.is_empty():
             raise IndexError("Priority queue is empty")
         else:
-            return self.priority_queue.pop(0)
+            return self.priority_queue.pop(0)["value"]
 
     def peek(self):
         if self.is_empty():
